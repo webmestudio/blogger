@@ -294,7 +294,174 @@ $.ws.materialcard = {
 $.ws.socialstats = { 
     activate : function() {
         (function($){
-			$.fn.SocialCounter=function(t){function e(){$.ajax({url:"https://api.pinterest.com/v3/pidgets/users/"+m.pinterest_user+"/pins",dataType:"jsonp",type:"GET",success:function(t){var e=parseInt(t.data.user.follower_count),s=l(e);$("#social-stats .item.pinterest .count").html(s),$("#social-stats .item.pinterest").attr("href","https://pinterest.com/"+m.pinterest_user)}})}function s(){$.ajax({url:"https://graph.facebook.com/v3.1/"+m.facebook_user+"?fields=name,fan_count",dataType:"json",type:"GET",data:{access_token:m.facebook_token},success:function(t){$("#social-stats .item.facebook .count").html(t.fan_count),$("#social-stats .item.facebook").attr("href","https://facebook.com/"+m.facebook_user)}})}function a(){$.ajax({url:"https://api.instagram.com/v1/users/self/",dataType:"json",type:"GET",data:{access_token:m.instagram_token},success:function(t){var e=parseInt(t.data.counts.followed_by),s=l(e);$("#social-stats .item.instagram .count").html(s),$("#social-stats .item.instagram").attr("href","https://instagram.com/"+m.instagram_user)}})}function o(){$.ajax({url:"https://www.googleapis.com/plus/v1/people/"+m.google_plus_id,type:"GET",dataType:"json",data:{key:m.google_plus_key},success:function(t){var e=parseInt(t.circledByCount),s=l(e);$("#social-stats .item.google .count").html(s),$("#social-stats .item.google").attr("href","https://plus.google.com/"+m.google_plus_id)}})}function n(){$.ajax({url:"https://www.googleapis.com/youtube/v3/channels",dataType:"json",type:"GET",data:{id:m.youtube_user,part:"snippet%2CcontentDetails%2Cstatistics",key:m.youtube_key},success:function(t){var e=parseInt(t.items[0].statistics.subscriberCount),s=l(e);$("#social-stats .item.youtube .count").html(s),$("#social-stats .item.youtube").attr("href","https://youtube.com/"+m.youtube_user)}})}function u(){$.ajax({url:"http://juanvargas.net/SocialCounters/twitter/index.php",dataType:"json",type:"GET",data:{user:m.twitter_user},success:function(t){var e=parseInt(t.followers);$("#social-stats .item.twitter .count").html(e).digits(),$("#social-stats .item.twitter").attr("href","https://twitter.com/"+m.twitter_user)}})}function i(){$.ajax({url:"https://api.github.com/users/"+m.github_user,dataType:"json",type:"GET",success:function(t){var e=parseInt(t.followers),s=l(e);$("#social-stats .item.github .count").html(s),$("#social-stats .item.github").attr("href","https://github.com/"+m.github_user)}})}function r(){$.ajax({url:"https://api.linkedin.com/v1/people/~:(num-connections,public-profile-url)",dataType:"jsonp",type:"GET",data:{oauth2_access_token:m.linkedin_oauth,format:"jsonp"},success:function(t){var e=parseInt(t.numConnections),s=l(e);$("#social-stats .item.linkedin .count").html(s),$("#social-stats .item.linkedin").attr("href",t.publicProfileUrl)}})}function c(){$.ajax({url:"http://www.juanvargas.net/SocialCounters/tumblr/callback.php",dataType:"json",type:"GET",data:{user:m.tumblr_username},success:function(t){var e=parseInt(t.followers),s=l(e);$("#social-stats .item.tumblr .count").html(s),$("#social-stats .item.tumblr").attr("href","https://"+m.tumblr_username+".tumblr.com")}})}function l(t){return t>999?(t/1e3).toFixed(1)+"k":t}function p(){$("#social-stats .item").attr("target","_blank")}var m=$.extend({twitter_user:"",facebook_user:"",instagram_user:"",google_plus_id:"",youtube_user:"",pinterest_user:"",github_user:"",tumblr_username:"muazramdany",youtube_key:"",facebook_token:"",instagram_token:"",google_plus_key:"",linkedin_oauth:""},t);$.fn.digits=function(){return this.each(function(){$(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g,"$1,"))})};p(),""!=m.twitter_user&&u(),""!=m.facebook_user&&""!=m.facebook_token&&s(),""!=m.instagram_user&&""!=m.instagram_token&&a(),""!=m.google_plus_id&&""!=m.google_plus_key&&o(),""!=m.linkedin_oauth&&r(),""!=m.youtube_user&&""!=m.youtube_key&&n(),""!=m.pinterest_user&&e(),""!=m.github_user&&i(),""!=m.tumblr_username&&c()};
+			$.fn.SocialCounter = function(t) {
+				function e() {
+					$.ajax({
+						url: "https://api.pinterest.com/v3/pidgets/users/" + m.pinterest_user + "/pins",
+						dataType: "jsonp",
+						type: "GET",
+						success: function(t) {
+							var e = parseInt(t.data.user.follower_count),
+								s = l(e);
+							$("#social-stats .item.pinterest .count").html(s), $("#social-stats .item.pinterest").attr("href", "https://pinterest.com/" + m.pinterest_user)
+						}
+					})
+				}
+
+				function s() {
+					$.ajax({
+						url: "https://graph.facebook.com/v3.1/" + m.facebook_user + "?fields=name,fan_count",
+						dataType: "json",
+						type: "GET",
+						data: {
+							access_token: m.facebook_token
+						},
+						success: function(t) {
+							$("#social-stats .item.facebook .count").html(t.fan_count), $("#social-stats .item.facebook").attr("href", "https://facebook.com/" + m.facebook_user)
+						}
+					})
+				}
+
+				function a() {
+					$.ajax({
+						url: "https://api.instagram.com/v1/users/self/",
+						dataType: "json",
+						type: "GET",
+						data: {
+							access_token: m.instagram_token
+						},
+						success: function(t) {
+							var e = parseInt(t.data.counts.followed_by),
+								s = l(e);
+							$("#social-stats .item.instagram .count").html(s), $("#social-stats .item.instagram").attr("href", "https://instagram.com/" + m.instagram_user)
+						}
+					})
+				}
+
+				function o() {
+					$.ajax({
+						url: "https://www.googleapis.com/plus/v1/people/" + m.google_plus_id,
+						type: "GET",
+						dataType: "json",
+						data: {
+							key: m.google_plus_key
+						},
+						success: function(t) {
+							var e = parseInt(t.circledByCount),
+								s = l(e);
+							$("#social-stats .item.google .count").html(s), $("#social-stats .item.google").attr("href", "https://plus.google.com/" + m.google_plus_id)
+						}
+					})
+				}
+
+				function n() {
+					$.ajax({
+						url: "https://www.googleapis.com/youtube/v3/channels",
+						dataType: "json",
+						type: "GET",
+						data: {
+							id: m.youtube_user,
+							part: "snippet%2CcontentDetails%2Cstatistics",
+							key: m.youtube_key
+						},
+						success: function(t) {
+							var e = parseInt(t.items[0].statistics.subscriberCount),
+								s = l(e);
+							$("#social-stats .item.youtube .count").html(s), $("#social-stats .item.youtube").attr("href", "https://youtube.com/" + m.youtube_user)
+						}
+					})
+				}
+
+				function u() {
+					$.ajax({
+						url: "http://juanvargas.net/SocialCounters/twitter/index.php",
+						dataType: "json",
+						type: "GET",
+						data: {
+							user: m.twitter_user
+						},
+						success: function(t) {
+							var e = parseInt(t.followers);
+							$("#social-stats .item.twitter .count").html(e).digits(), $("#social-stats .item.twitter").attr("href", "https://twitter.com/" + m.twitter_user)
+						}
+					})
+				}
+
+				function i() {
+					$.ajax({
+						url: "https://api.github.com/users/" + m.github_user,
+						dataType: "json",
+						type: "GET",
+						success: function(t) {
+							var e = parseInt(t.followers),
+								s = l(e);
+							$("#social-stats .item.github .count").html(s), $("#social-stats .item.github").attr("href", "https://github.com/" + m.github_user)
+						}
+					})
+				}
+
+				function r() {
+					$.ajax({
+						url: "https://api.linkedin.com/v1/people/~:(num-connections,public-profile-url)",
+						dataType: "jsonp",
+						type: "GET",
+						data: {
+							oauth2_access_token: m.linkedin_oauth,
+							format: "jsonp"
+						},
+						success: function(t) {
+							var e = parseInt(t.numConnections),
+								s = l(e);
+							$("#social-stats .item.linkedin .count").html(s), $("#social-stats .item.linkedin").attr("href", t.publicProfileUrl)
+						}
+					})
+				}
+
+				function c() {
+					$.ajax({
+						url: "http://www.juanvargas.net/SocialCounters/tumblr/callback.php",
+						dataType: "json",
+						type: "GET",
+						data: {
+							user: m.tumblr_username
+						},
+						success: function(t) {
+							var e = parseInt(t.followers),
+								s = l(e);
+							$("#social-stats .item.tumblr .count").html(s), $("#social-stats .item.tumblr").attr("href", "https://" + m.tumblr_username + ".tumblr.com")
+						}
+					})
+				}
+
+				function l(t) {
+					return t > 999 ? (t / 1e3).toFixed(1) + "k" : t
+				}
+
+				function p() {
+					$("#social-stats .item").attr("target", "_blank")
+				}
+				var m = $.extend({
+					twitter_user: "",
+					facebook_user: "",
+					instagram_user: "",
+					google_plus_id: "",
+					youtube_user: "",
+					pinterest_user: "",
+					github_user: "",
+					tumblr_username: "muazramdany",
+					youtube_key: "",
+					facebook_token: "",
+					instagram_token: "",
+					google_plus_key: "",
+					linkedin_oauth: ""
+				}, t);
+				$.fn.digits = function() {
+					return this.each(function() {
+						$(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+					})
+				};
+				p(), "" != m.twitter_user && u(), "" != m.facebook_user && "" != m.facebook_token && s(), "" != m.instagram_user && "" != m.instagram_token && a(), "" != m.google_plus_id && "" != m.google_plus_key && o(), "" != m.linkedin_oauth && r(), "" != m.youtube_user && "" != m.youtube_key && n(), "" != m.pinterest_user && e(), "" != m.github_user && i(), "" != m.tumblr_username && c()
+			};
 		}(jQuery))
     } // #end activated();
 }
