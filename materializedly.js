@@ -338,43 +338,25 @@ $.ws.socialstats = {
 					})
 				}
 
-				function o() {
-					$.ajax({
-						url: "https://www.googleapis.com/plus/v1/people/" + m.google_plus_id,
-						type: "GET",
-						dataType: "json",
-						data: {
-							key: m.google_plus_key
-						},
-						success: function(t) {
-							var e = parseInt(t.circledByCount),
-								s = l(e);
-							$("#social-stats .item.google .count").html(s), $("#social-stats .item.google").attr("href", "https://plus.google.com/" + m.google_plus_id)
-						}
-					})
-				}
-
 				function n() {
 					$.ajax({
-						url: "https://www.googleapis.com/youtube/v3/channels",
+						url: "https://sosmed-stats.herokuapp.com/?provider=youtube",
 						dataType: "json",
 						type: "GET",
 						data: {
-							id: m.youtube_user,
-							part: "snippet%2CcontentDetails%2Cstatistics",
-							key: m.youtube_key
+							channel_id: m.youtube_channel,
 						},
 						success: function(t) {
-							var e = parseInt(t.items[0].statistics.subscriberCount),
+							var e = parseInt(t.subscriber),
 								s = l(e);
-							$("#social-stats .item.youtube .count").html(s), $("#social-stats .item.youtube").attr("href", "https://youtube.com/" + m.youtube_user)
+							$("#social-stats .item.youtube .count").html(s), $("#social-stats .item.youtube").attr("href", "https://www.youtube.com/channel/" + m.youtube_channel)
 						}
 					})
 				}
 
 				function u() {
 					$.ajax({
-						url: "http://juanvargas.net/SocialCounters/twitter/index.php",
+						url: "https://sosmed-stats.herokuapp.com/?provider=twitter",
 						dataType: "json",
 						type: "GET",
 						data: {
@@ -441,26 +423,33 @@ $.ws.socialstats = {
 					$("#social-stats .item").attr("target", "_blank")
 				}
 				var m = $.extend({
-					twitter_user: "",
-					facebook_user: "",
-					instagram_user: "",
-					google_plus_id: "",
-					youtube_user: "",
-					pinterest_user: "",
-					github_user: "",
-					tumblr_username: "muazramdany",
-					youtube_key: "",
-					facebook_token: "",
-					instagram_token: "",
-					google_plus_key: "",
-					linkedin_oauth: ""
+					twitter_user	: "",
+					facebook_user	: "",
+					instagram_user	: "",
+					youtube_channel	: "",
+					pinterest_user	: "",
+					github_user		: "",
+					tumblr_username	: "",
+					facebook_token	: "",
+					instagram_token	: "",
+					linkedin_oauth	: ""
 				}, t);
 				$.fn.digits = function() {
 					return this.each(function() {
 						$(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
 					})
 				};
-				p(), "" != m.twitter_user && u(), "" != m.facebook_user && "" != m.facebook_token && s(), "" != m.instagram_user && "" != m.instagram_token && a(), "" != m.google_plus_id && "" != m.google_plus_key && o(), "" != m.linkedin_oauth && r(), "" != m.youtube_user && "" != m.youtube_key && n(), "" != m.pinterest_user && e(), "" != m.github_user && i(), "" != m.tumblr_username && c()
+				
+				p(), 
+				
+				"" != m.twitter_user && u(), 
+				"" != m.facebook_user && "" != m.facebook_token && s(), 
+				"" != m.instagram_user && "" != m.instagram_token && a(), 
+				"" != m.linkedin_oauth && r(), 
+				"" != m.youtube_channel && n(), 
+				"" != m.pinterest_user && e(), 
+				"" != m.github_user && i(), 
+				"" != m.tumblr_username && c()
 			};
 		}(jQuery))
     } // #end activated();
