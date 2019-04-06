@@ -294,7 +294,176 @@ $.ws.materialcard = {
 $.ws.socialstats = { 
     activate : function() {
         (function($){
-			$.fn.SocialCounter = function(t) {
+			
+			$.fn.SosmedGetStats = function(options) {
+				var settings = $.extend({
+					twitter_user	: '',
+					facebook_user	: '',
+					instagram_user	: '',
+					youtube_channel	: '',
+					pinterest_user	: '',
+					github_user		: '',
+					
+					facebook_token	: '',
+					instagram_token	: '',
+					linkedin_oauth	: '',
+				}, options)
+
+				function pinterest() {
+					$.ajax({
+						url: 'https://api.pinterest.com/v3/pidgets/users/' + settings.pinterest_user + '/pins',
+						dataType: 'jsonp',
+						type: 'GET',
+						success: function(data) {
+							var followers = parseInt(data.data.user.follower_count);
+							var k = kFormatter(followers);
+							$('#social-stats .item.pinterest .count').html(k);
+							$('#social-stats .item.pinterest').attr('href', 'https://pinterest.com/' + settings.pinterest_user);
+						}
+					})
+				}
+
+				function facebook() {
+					$.ajax({
+						url: 'https://graph.facebook.com/v3.1/' + settings.facebook_user + '?fields=name,fan_count',
+						dataType: 'json',
+						type: 'GET',
+						data: {
+							access_token: settings.facebook_token,
+						},
+						success: function(data) {
+							//var datas = JSON.parse(data);
+							$('#social-stats .item.facebook .count').html(data.fan_count);
+							$('#social-stats .item.facebook').attr('href', 'https://www.facebook.com/' + settings.facebook_user);
+						}
+					})
+				}
+
+				function instagram() {
+					$.ajax({
+						url: 'https://api.instagram.com/v1/users/self/',
+						dataType: 'json',
+						type: 'GET',
+						data: {
+							access_token: settings.instagram_token
+						},
+						success: function(data) {
+							var followers = parseInt(data.data.counts.followed_by);
+							var k = kFormatter(followers);
+							$('#social-stats .item.instagram .count').html(k);
+							$('#social-stats .item.instagram').attr('href', 'https://instagram.com/' + settings.instagram_user);
+						}
+					})
+				}
+
+				function youtube() {
+					$.ajax({
+						url: 'https://webmestudio-sosmedgetstats.herokuapp.com/?provider=youtube',
+						dataType: 'json',
+						type: 'GET',
+						data: {
+							channel_id: settings.youtube_channel,
+						},
+						success: function(data) {
+							var subscribers = parseInt(data.subscriber);
+							var k = kFormatter(subscribers);
+							$('#social-stats .item.youtube .count').html(k);
+							$('#social-stats .item.youtube').attr('href', 'https://wwww.youtube.com/channel/' + settings.youtube_channel);
+						}
+					})
+				}
+
+				function twitter() {
+					$.ajax({
+						url: 'https://webmestudio-sosmedgetstats.herokuapp.com/?provider=twitter',
+						dataType: 'json',
+						type: 'GET',
+						data: {
+							username: settings.twitter_user
+						},
+						success: function(data) {
+							var followers = parseInt(data.followers);
+							$('#social-stats .item.twitter .count').html(followers).digits();
+							$('#social-stats .item.twitter').attr('href', 'https://twitter.com/' + settings.twitter_user);
+						}
+					})
+				}
+
+				function github() {
+					$.ajax({
+						url: 'https://api.github.com/users/' + settings.github_user,
+						dataType: 'json',
+						type: 'GET',
+						success: function(data) {
+							var followers = parseInt(data.followers);
+							var k = kFormatter(followers);
+							$('#social-stats .item.github .count').html(k);
+							$('#social-stats .item.github').attr('href', 'https://github.com/' + settings.github_user);
+						}
+					})
+				}
+
+				function linkedin() {
+					$.ajax({
+						url: 'https://api.linkedin.com/v1/people/~:(num-connections,public-profile-url)',
+						dataType: 'jsonp',
+						type: 'GET',
+						data: {
+							oauth2_access_token: settings.linkedin_oauth,
+							format: 'jsonp'
+						},
+						success: function(data) {
+							var connections = parseInt(data.numConnections);
+							var k = kFormatter(connections);
+							$('#social-stats .item.linkedin .count').html(k);
+							$('#social-stats .item.linkedin').attr('href', data.publicProfileUrl);
+						}
+					})
+				}
+				
+				$.fn.digits = function() {
+					return this.each(function() {
+						$(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+					})
+				}
+
+				function kFormatter(num) {
+					return num > 999 ? (num / 1000).toFixed(1) + 'k' : num
+				}
+
+				function mFormatter(num) {
+					return num > 999999 ? (num / 1000000).toFixed(1) + 'm' : num
+				}
+
+				function linkClick() {
+					$('#social-stats .item').attr('target', '_blank')
+				}
+				
+				linkClick();
+				
+				if (settings.twitter_user != '') {
+					twitter()
+				}
+				if (settings.facebook_user != '' && settings.facebook_token != '') {
+					facebook()
+				}
+				if (settings.instagram_user != '' && settings.instagram_token != '') {
+					instagram()
+				}
+				if (settings.linkedin_oauth != '') {
+					linkedin()
+				}
+				if (settings.youtube_user != '') {
+					youtube()
+				}
+				if (settings.pinterest_user != '') {
+					pinterest()
+				}
+				if (settings.github_user != '') {
+					github()
+				}
+			} //END $.fn.sosmedstats
+			
 				function e() {
 					$.ajax({
 						url: "https://api.pinterest.com/v3/pidgets/users/" + m.pinterest_user + "/pins",
