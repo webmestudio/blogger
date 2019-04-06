@@ -1791,6 +1791,9 @@ textarea { resize: none; }
 #social-stats ul li.ss-pinterest {
 	background: #b60b12;
 }
+#social-stats ul li.ss-github {
+	background: #333;
+}
 
 #social-stats ul li.ss-instagram:hover {
 	background: #9b6954;
@@ -1818,6 +1821,9 @@ textarea { resize: none; }
 }
 #social-stats ul li.ss-pinterest:hover {
 	background: #b60b12;
+}
+#social-stats ul li.ss-github:hover {
+	background: #333;
 }
 #social-stats ul li a large {
 	color: #555555;
