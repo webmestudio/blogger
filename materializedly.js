@@ -18,8 +18,9 @@ $.ws.init = {
         }
         
         /* fastclick */
-        var attachFastClick = Origami.fastclick;
-            attachFastClick(document.body);
+        /*var attachFastClick = Origami.fastclick;
+            attachFastClick(document.body);*/
+        FastClick.attach(document.body);
 			
 		/* plugin fancybox */
 		if(typeof $.fn.fancybox != 'undefined') {
