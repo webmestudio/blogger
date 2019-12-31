@@ -327,10 +327,11 @@ $.ws.socialstats = {
 
 				function facebook() {
 					$.ajax({
-						url: 'https://webmestudio-sosmedgetstats.herokuapp.com/?provider=facebook&type=fanspage',
+						url: 'https://webmestudio-sosmedgetstats.herokuapp.com/?provider=facebook',
 						dataType: 'json',
 						type: 'GET',
 						data: {
+                            type: 'fanspage',
 							username: settings.facebook_user,
                             param: 'likes'
 						},
@@ -352,9 +353,7 @@ $.ws.socialstats = {
                             param: 'followers'
 						},
 						success: function(data) {
-							var followers = parseInt(data.followers);
-							var k = kFormatter(followers);
-							$('#social-stats .item.instagram .count').html(k);
+							$('#social-stats .item.instagram .count').html(data.followers);
 							$('#social-stats .item.instagram').attr('href', 'https://instagram.com/' + settings.instagram_user);
 						}
 					})
