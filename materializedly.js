@@ -327,15 +327,16 @@ $.ws.socialstats = {
 
 				function facebook() {
 					$.ajax({
-						url: 'https://graph.facebook.com/v3.1/' + settings.facebook_user + '?fields=name,fan_count',
+						url: 'https://webmestudio-sosmedgetstats.herokuapp.com/?provider=facebook&type=fanspage',
 						dataType: 'json',
 						type: 'GET',
 						data: {
-							access_token: settings.facebook_token,
+							username: settings.facebook_user,
+                            param: 'likes'
 						},
 						success: function(data) {
 							//var datas = JSON.parse(data);
-							$('#social-stats .item.facebook .count').html(data.fan_count);
+							$('#social-stats .item.facebook .count').html(data.likes);
 							$('#social-stats .item.facebook').attr('href', 'https://www.facebook.com/' + settings.facebook_user);
 						}
 					})
@@ -343,14 +344,15 @@ $.ws.socialstats = {
 
 				function instagram() {
 					$.ajax({
-						url: 'https://api.instagram.com/v1/users/self/',
+						url: 'https://webmestudio-sosmedgetstats.herokuapp.com/?provider=instagram',
 						dataType: 'json',
 						type: 'GET',
 						data: {
-							access_token: settings.instagram_token
+							username: settings.instagram_user,
+                            param: 'followers'
 						},
 						success: function(data) {
-							var followers = parseInt(data.data.counts.followed_by);
+							var followers = parseInt(data.followers);
 							var k = kFormatter(followers);
 							$('#social-stats .item.instagram .count').html(k);
 							$('#social-stats .item.instagram').attr('href', 'https://instagram.com/' + settings.instagram_user);
