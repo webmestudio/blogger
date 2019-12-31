@@ -448,10 +448,10 @@ $.ws.socialstats = {
 				if (settings.twitter_user != '') {
 					twitter()
 				}
-				if (settings.facebook_user != '' && settings.facebook_token != '') {
+				if (settings.facebook_user != '') {
 					facebook()
 				}
-				if (settings.instagram_user != '' && settings.instagram_token != '') {
+				if (settings.instagram_user != '') {
 					instagram()
 				}
 				if (settings.linkedin_oauth != '') {
