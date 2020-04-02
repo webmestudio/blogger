@@ -504,7 +504,7 @@ $.ws.cookie = {
                 showLink: false,
                 position: "bottom-right",
                 content : {
-                    message : "Situs web ini menggunakan cookies untuk memastikan Anda mendapatkan pengalaman terbaik di situs kami.",
+                    message : "Situs web ini menggunakan cookies untuk memastikan Anda mendapatkan pengalaman terbaik di situs ini.",
                     dismiss : "Mengerti",
                     link : "Belajar lagi"
                 }
