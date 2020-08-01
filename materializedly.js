@@ -353,7 +353,13 @@ $.ws.socialstats = {
                             param: 'followers'
 						},
 						success: function(data) {
-							$('#social-stats .item.instagram .count').html(data.followers);
+							if (data.followers == null) {
+								var followers = 0
+							}
+							else {
+								var followers = data.followers
+							}
+							$('#social-stats .item.instagram .count').html(followers);
 							$('#social-stats .item.instagram').attr('href', 'https://instagram.com/' + settings.instagram_user);
 						}
 					})
