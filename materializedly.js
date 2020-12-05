@@ -327,7 +327,7 @@ $.ws.socialstats = {
 
 				function facebook() {
 					$.ajax({
-						url: 'https://webmestudio-sosmedgetstats.herokuapp.com/?provider=facebook',
+						url: 'https://ws-sosmed-activity.herokuapp.com/?provider=facebook',
 						dataType: 'json',
 						type: 'GET',
 						data: {
@@ -345,7 +345,7 @@ $.ws.socialstats = {
 
 				function instagram() {
 					$.ajax({
-						url: 'https://webmestudio-sosmedgetstats.herokuapp.com/?provider=instagram',
+						url: 'https://ws-sosmed-activity.herokuapp.com/?provider=instagram',
 						dataType: 'json',
 						type: 'GET',
 						data: {
@@ -367,7 +367,7 @@ $.ws.socialstats = {
 
 				function youtube() {
 					$.ajax({
-						url: 'https://webmestudio-sosmedgetstats.herokuapp.com/?provider=youtube',
+						url: 'https://ws-sosmed-activity.herokuapp.com/?provider=youtube',
 						dataType: 'json',
 						type: 'GET',
 						data: {
@@ -384,7 +384,7 @@ $.ws.socialstats = {
 
 				function twitter() {
 					$.ajax({
-						url: 'https://webmestudio-sosmedgetstats.herokuapp.com/?provider=twitter',
+						url: 'https://ws-sosmed-activity.herokuapp.com/?provider=twitter',
 						dataType: 'json',
 						type: 'GET',
 						data: {
